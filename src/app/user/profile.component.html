@@ -1,0 +1,24 @@
+<h1>Edit Your Profile</h1>
+<hr />
+<div class="col-md-4">
+  <form [formGroup]="profileForm" (ngSubmit)="updateProfile(profileForm.value.userName)" autocomplete="off" novalidate>
+    <div class="form-group">
+      <label for="userName">User Name:
+        <em *ngIf="profileForm.controls.userName?.touched && !profileForm.controls.userName?.value">Required</em>
+      </label>
+      <input
+        id="userName"
+        formControlName="userName"
+        name="userName"
+        type="text"
+        class="form-control"
+        placeholder="User Name..."
+      />
+    </div>
+
+    <span>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </span>
+    <button type="button" class="btn btn-warning ml-2" (click)="cancel()">Cancel</button>
+  </form>
+</div>

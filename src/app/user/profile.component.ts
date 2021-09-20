@@ -1,18 +1,29 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
-  template: `
-    <h1>Edit Your Profile</h1>
-    <hr>
-    <div class="col-md-6">
-      <h3>[Edit profile form will go here]</h3>
-      <br />
-      <br />
-      <button type="submit" class="btn btn-primary">Save</button>
-      <button type="button" class="btn mx-1 btn-warning">Cancel</button>
-    </div>
-  `,
+  templateUrl: './profile.component.html',
+  styles: [`
+      em { color: red; font-size: 12px }
+  `]
 })
-export class ProfileComponent {
-       
+export class ProfileComponent implements OnInit {
+  profileForm: FormGroup
+  userName: FormControl
+  constructor (private auth: AuthService, private router: Router) {}
+
+  ngOnInit () {
+    this.userName = new FormControl(this.auth.currentUser.userName, Validators.required)
+
+    this.profileForm = new FormGroup({ userName: this.userName })
+  }
+  updateProfile (username) {
+    return this.auth.updateUser(username)
+  }
+
+  cancel () {
+    return this.auth.cancelAuth()
+  }
 }

@@ -38,6 +38,7 @@
         Search
       </button>
     </form>
-    <a class="px-3 font-smaller nav-link text-white" [routerLink]="['/user/profile']">Welcome Chukwudi</a>
+    <a class="px-3 font-smaller nav-link text-white" [routerLink]="['/user/login']"  *ngIf="!this.auth.isAuthenticated()">Login</a>
+    <a class="px-3 font-smaller nav-link text-white" [routerLink]="['/user/profile']" *ngIf="this.auth.isAuthenticated()">Welcome {{ this.auth.currentUser.userName }}</a>
   </div>
 </nav>

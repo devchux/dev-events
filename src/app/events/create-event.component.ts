@@ -3,16 +3,24 @@ import { Router } from '@angular/router'
 
 @Component({
     selector: 'create-event',
-    template: `
-        <h3>[Create New Event Here]</h3>
-        <button class="btn btn-primary m-2">Save</button>
-        <button class="btn btn-danger" (click)="cancel()">Cancel</button>
-    `,
+    templateUrl: './create-event.component.html',
+    styles: [`
+        em { color: red;
+            font-size: 12px; }
+        .error {
+            background-color: rgba(255,100,100,0.3);
+            font-size: 12px;
+        }
+    `]
 })
 export class CreateEventComponent {
+    newEvent
     isDirty:boolean = true
     constructor(private router: Router){}
-    cancel() {
+    saveEvent (formData) {
+        console.log(formData)
+    }
+    cancel () {
         this.router.navigate(['/events'])
     }
 }
